@@ -1,79 +1,70 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# HotSpot Manager
 
-# Getting Started
+A React Native application that helps manage your device's hotspot functionality and displays network information. The app allows users to toggle their hotspot on/off and view hotspot-related network details.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Features
 
-## Step 1: Start the Metro Server
+- Toggle hotspot on/off
+- Display device's hotspot IP address
+- For Android devices below API level 33 (Android 13):
+  - View list of connected devices' IP addresses
+  - Monitor real-time connections
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## Technical Notes
 
-To start Metro, run the following command from the _root_ of your React Native project:
+### Android 13+ Limitations
 
-```bash
-# using npm
-npm start
+Due to privacy changes introduced in Android 13 (API level 33), apps can no longer access information about connected devices. This is a system-level restriction that affects all third-party applications. As a result, the connected devices list feature is only available on devices running Android 12 or below.
 
-# OR using Yarn
-yarn start
-```
+## Prerequisites
 
-## Step 2: Start your Application
+- Node.js >= 18
+- React Native CLI
+- Android Studio
+- Android SDK Platform 33 (for development)
+- Physical Android device for testing (virtual devices don't support hotspot features)
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+## Installation
 
-### For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### For iOS
+1. Clone the repository:
 
 ```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+git clone https://github.com/abdulrehmansk97/assignment-hotspot-scanner.git
+cd assignment-hotspot-scanner
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+2. Install dependencies:
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+```bash
+npm install
+# or
+yarn install
+```
 
-## Step 3: Modifying your App
+3. Run the app:
 
-Now that you have successfully run the app, let's modify it.
+```bash
+npx react-native run-android
+```
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+## Required Permissions
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+The app requires the following Android permissions:
 
-## Congratulations! :tada:
+```xml
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+```
 
-You've successfully run and modified your React Native App. :partying_face:
+## Known Issues
 
-### Now what?
+1. Connected devices list functionality is not available on Android 13 and above due to system restrictions
+2. Some devices might require specific manufacturer permissions for hotspot management
+3. Code for fetching connected devices (Android 12 and below) needs testing with actual devices
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+## Testing Notes
 
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+The application has been tested for basic hotspot functionality, but the connected devices list feature (for Android 12 and below) requires additional testing with physical devices.
